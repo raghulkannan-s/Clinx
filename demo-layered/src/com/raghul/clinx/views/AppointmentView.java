@@ -1,6 +1,7 @@
-package com.raghul.clinx.features.appointment;
+package com.raghul.clinx.views;
 
 import com.raghul.clinx.data.dto.AppointmentDTO;
+import com.raghul.clinx.services.AppointmentService;
 import java.util.List;
 import java.util.Scanner;
 

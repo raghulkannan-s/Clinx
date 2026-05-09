@@ -1,6 +1,7 @@
-package com.raghul.clinx.features.doctor;
+package com.raghul.clinx.views;
 
 import com.raghul.clinx.data.dto.DoctorDetailDTO;
+import com.raghul.clinx.services.DoctorService;
 import java.util.List;
 import java.util.Scanner;
 

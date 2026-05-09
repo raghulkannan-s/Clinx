@@ -1,6 +1,7 @@
-package com.raghul.clinx.features.billing;
+package com.raghul.clinx.views;
 
 import com.raghul.clinx.data.dto.InvoiceDTO;
+import com.raghul.clinx.services.BillingService;
 import java.util.List;
 import java.util.Scanner;
 

@@ -1,6 +1,7 @@
-package com.raghul.clinx.features.auth;
+package com.raghul.clinx.views;
 
 import com.raghul.clinx.data.dto.LoginRequest;
+import com.raghul.clinx.services.AuthService;
 import java.util.Scanner;
 
 public class AuthView {

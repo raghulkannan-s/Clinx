@@ -1,5 +1,6 @@
-package com.raghul.clinx.features.patient;
+package com.raghul.clinx.views;
 
+import com.raghul.clinx.services.PatientService;
 import java.util.List;
 import java.util.Scanner;
 

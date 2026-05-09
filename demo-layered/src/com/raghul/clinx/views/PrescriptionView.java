@@ -1,5 +1,6 @@
-package com.raghul.clinx.features.prescription;
+package com.raghul.clinx.views;
 
+import com.raghul.clinx.services.PrescriptionService;
 import java.util.List;
 import java.util.Scanner;
 
