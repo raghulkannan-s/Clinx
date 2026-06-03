@@ -37,12 +37,9 @@ public class PrescriptionView {
 	}
 
 	private void addPrescription() {
-		System.out.print("Patient name: ");
-		String patientName = scanner.nextLine().trim();
-		System.out.print("Doctor name: ");
-		String doctorName = scanner.nextLine().trim();
-		System.out.print("Notes: ");
-		String notes = scanner.nextLine().trim();
+		String patientName = readRequired("Patient name: ");
+		String doctorName = readRequired("Doctor name: ");
+		String notes = readRequired("Notes: ");
 		service.addPrescription(patientName, doctorName, notes);
 		System.out.println("Prescription added.");
 	}
@@ -67,6 +64,17 @@ public class PrescriptionView {
 			} catch (NumberFormatException ex) {
 				System.out.println("Enter a valid number.");
 			}
+		}
+	}
+
+	private String readRequired(String prompt) {
+		while (true) {
+			System.out.print(prompt);
+			String value = scanner.nextLine().trim();
+			if (!value.isEmpty()) {
+				return value;
+			}
+			System.out.println("This field is required.");
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.raghul.clinx.features.auth;
 
 import com.raghul.clinx.data.dto.LoginRequest;
+import com.raghul.clinx.data.dto.UserDTO;
 import com.raghul.clinx.security.PasswordHasher;
 
 public class AuthService {
@@ -17,5 +18,14 @@ public class AuthService {
             return false;
         }
         return PasswordHasher.matches(request.getPassword(), storedHash);
+    }
+
+    public boolean register(String name, String email, String role, String password) {
+        if (repository.getUserByEmail(email) != null) {
+            return false;
+        }
+        UserDTO user = new UserDTO(repository.nextUserId(), name, email, role, System.currentTimeMillis());
+        repository.addUser(user, PasswordHasher.hash(password));
+        return true;
     }
 }

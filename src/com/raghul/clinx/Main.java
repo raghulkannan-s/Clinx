@@ -17,7 +17,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         AuthView authView = new AuthView(scanner);
 
-        if (!authView.login()) {
+        if (!authView.start()) {
             return;
         }
 

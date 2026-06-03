@@ -42,11 +42,9 @@ public class BillingView {
 	}
 
 	private void createInvoice() {
-		System.out.print("Patient name: ");
-		String patientName = scanner.nextLine().trim();
-		System.out.print("Doctor name: ");
-		String doctorName = scanner.nextLine().trim();
-		double amount = readDouble("Total amount: ");
+		String patientName = readRequired("Patient name: ");
+		String doctorName = readRequired("Doctor name: ");
+		double amount = readPositiveDouble("Total amount: ");
 
 		InvoiceDTO invoice = service.createInvoice(patientName, doctorName, amount);
 		System.out.println("Invoice created with ID: " + invoice.getInvoiceId());
@@ -104,6 +102,27 @@ public class BillingView {
 			} catch (NumberFormatException ex) {
 				System.out.println("Enter a valid amount.");
 			}
+		}
+	}
+
+	private double readPositiveDouble(String prompt) {
+		while (true) {
+			double value = readDouble(prompt);
+			if (value > 0) {
+				return value;
+			}
+			System.out.println("Amount must be greater than zero.");
+		}
+	}
+
+	private String readRequired(String prompt) {
+		while (true) {
+			System.out.print(prompt);
+			String value = scanner.nextLine().trim();
+			if (!value.isEmpty()) {
+				return value;
+			}
+			System.out.println("This field is required.");
 		}
 	}
 }

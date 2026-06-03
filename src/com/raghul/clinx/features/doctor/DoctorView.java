@@ -42,12 +42,10 @@ public class DoctorView {
 	}
 
 	private void addDoctor() {
-		System.out.print("Name: ");
-		String name = scanner.nextLine().trim();
-		System.out.print("Specialization: ");
-		String specialization = scanner.nextLine().trim();
-		double fee = readDouble("Consultation fee: ");
-		int experience = readInt("Experience (years): ");
+		String name = readRequired("Name: ");
+		String specialization = readRequired("Specialization: ");
+		double fee = readPositiveDouble("Consultation fee: ");
+		int experience = readNonNegativeInt("Experience (years): ");
 
 		DoctorDetailDTO doctor = service.addDoctor(name, specialization, fee, experience);
 		System.out.println("Doctor added with ID: " + doctor.getDoctorId());
@@ -104,6 +102,37 @@ public class DoctorView {
 			} catch (NumberFormatException ex) {
 				System.out.println("Enter a valid amount.");
 			}
+		}
+	}
+
+	private double readPositiveDouble(String prompt) {
+		while (true) {
+			double value = readDouble(prompt);
+			if (value > 0) {
+				return value;
+			}
+			System.out.println("Amount must be greater than zero.");
+		}
+	}
+
+	private int readNonNegativeInt(String prompt) {
+		while (true) {
+			int value = readInt(prompt);
+			if (value >= 0) {
+				return value;
+			}
+			System.out.println("Value cannot be negative.");
+		}
+	}
+
+	private String readRequired(String prompt) {
+		while (true) {
+			System.out.print(prompt);
+			String value = scanner.nextLine().trim();
+			if (!value.isEmpty()) {
+				return value;
+			}
+			System.out.println("This field is required.");
 		}
 	}
 }

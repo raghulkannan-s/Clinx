@@ -42,13 +42,10 @@ public class AppointmentView {
 	}
 
 	private void createAppointment() {
-		System.out.print("Patient name: ");
-		String patientName = scanner.nextLine().trim();
-		System.out.print("Doctor name: ");
-		String doctorName = scanner.nextLine().trim();
-		long date = readLong("Appointment date (yyyymmdd): ");
-		System.out.print("Time slot (e.g., 10:00-10:30): ");
-		String timeSlot = scanner.nextLine().trim();
+		String patientName = readRequired("Patient name: ");
+		String doctorName = readRequired("Doctor name: ");
+		long date = readDate("Appointment date (yyyymmdd): ");
+		String timeSlot = readRequired("Time slot (e.g., 10:00-10:30): ");
 
 		AppointmentDTO appointment = service.createAppointment(patientName, doctorName, date, timeSlot);
 		System.out.println("Appointment created with ID: " + appointment.getAppointmentId());
@@ -94,6 +91,27 @@ public class AppointmentView {
 			} catch (NumberFormatException ex) {
 				System.out.println("Enter a valid number.");
 			}
+		}
+	}
+
+	private long readDate(String prompt) {
+		while (true) {
+			String value = readRequired(prompt);
+			if (value.length() == 8 && value.chars().allMatch(Character::isDigit)) {
+				return Long.parseLong(value);
+			}
+			System.out.println("Enter date as 8 digits in yyyymmdd format.");
+		}
+	}
+
+	private String readRequired(String prompt) {
+		while (true) {
+			System.out.print(prompt);
+			String value = scanner.nextLine().trim();
+			if (!value.isEmpty()) {
+				return value;
+			}
+			System.out.println("This field is required.");
 		}
 	}
 }

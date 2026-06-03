@@ -5,6 +5,10 @@ import com.raghul.clinx.data.repository.ClinXDB;
 
 public class AuthRepository {
 
+    public long nextUserId() {
+        return ClinXDB.nextUserId();
+    }
+
     public UserDTO getUserByEmail(String email) {
         return ClinXDB.getUserByEmail(email);
     }

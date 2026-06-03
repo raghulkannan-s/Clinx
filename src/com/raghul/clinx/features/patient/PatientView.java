@@ -41,8 +41,7 @@ public class PatientView {
 	}
 
 	private void addPatient() {
-		System.out.print("Patient name: ");
-		String name = scanner.nextLine().trim();
+		String name = readRequired("Patient name: ");
 		service.addPatient(name);
 		System.out.println("Patient added.");
 	}
@@ -59,10 +58,20 @@ public class PatientView {
 	}
 
 	private void removePatient() {
-		System.out.print("Patient name to remove: ");
-		String name = scanner.nextLine().trim();
+		String name = readRequired("Patient name to remove: ");
 		boolean removed = service.removePatient(name);
 		System.out.println(removed ? "Patient removed." : "Patient not found.");
+	}
+
+	private String readRequired(String prompt) {
+		while (true) {
+			System.out.print(prompt);
+			String value = scanner.nextLine().trim();
+			if (!value.isEmpty()) {
+				return value;
+			}
+			System.out.println("This field is required.");
+		}
 	}
 
 	private int readInt(String prompt) {
