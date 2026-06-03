@@ -49,7 +49,7 @@ public class ClinXDB {
 
 	public static void addUser(UserDTO user, String passwordHash) {
 		users.add(user);
-		passwordHashes.put(user.getEmail(), passwordHash);
+		passwordHashes.put(normalizeEmail(user.getEmail()), passwordHash);
 	}
 
 	public static UserDTO getUserByEmail(String email) {
@@ -62,7 +62,11 @@ public class ClinXDB {
 	}
 
 	public static String getPasswordHash(String email) {
-		return passwordHashes.get(email);
+		return passwordHashes.get(normalizeEmail(email));
+	}
+
+	private static String normalizeEmail(String email) {
+		return email == null ? null : email.trim().toLowerCase();
 	}
 
 	public static List<UserDTO> getUsers() {

@@ -26,10 +26,7 @@ public class AuthView {
 
 			switch (choice) {
 				case "1":
-					if (login()) {
-						return true;
-					}
-					break;
+					return login();
 				case "2":
 					register();
 					break;

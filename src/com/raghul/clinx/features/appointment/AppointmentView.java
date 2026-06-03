@@ -1,6 +1,9 @@
 package com.raghul.clinx.features.appointment;
 
 import com.raghul.clinx.data.dto.AppointmentDTO;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -97,10 +100,12 @@ public class AppointmentView {
 	private long readDate(String prompt) {
 		while (true) {
 			String value = readRequired(prompt);
-			if (value.length() == 8 && value.chars().allMatch(Character::isDigit)) {
+			try {
+				LocalDate.parse(value, DateTimeFormatter.BASIC_ISO_DATE);
 				return Long.parseLong(value);
+			} catch (DateTimeParseException ex) {
+				System.out.println("Enter date as 8 digits in yyyymmdd format.");
 			}
-			System.out.println("Enter date as 8 digits in yyyymmdd format.");
 		}
 	}
 

@@ -21,11 +21,16 @@ public class AuthService {
     }
 
     public boolean register(String name, String email, String role, String password) {
-        if (repository.getUserByEmail(email) != null) {
+        String normalizedEmail = normalizeEmail(email);
+        if (repository.getUserByEmail(normalizedEmail) != null) {
             return false;
         }
-        UserDTO user = new UserDTO(repository.nextUserId(), name, email, role, System.currentTimeMillis());
+        UserDTO user = new UserDTO(repository.nextUserId(), name, normalizedEmail, role, System.currentTimeMillis());
         repository.addUser(user, PasswordHasher.hash(password));
         return true;
+    }
+
+    private String normalizeEmail(String email) {
+        return email == null ? null : email.trim().toLowerCase();
     }
 }
