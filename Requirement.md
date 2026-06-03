@@ -5,6 +5,21 @@
 - Timeline: 1 month
 - Team size: 1
 
+## Phases and Time Constraints
+
+### Phase 1
+- Auth: register/login with validation
+- Doctor availability setup
+- Appointment booking (doctor + date/time)
+- Queue status (Pending / Checked-In / Completed)
+- Search doctors (name or specialization)
+
+### Phase 2
+- Billing (auto-generate after consultation)
+- Prescriptions (notes/medicine)
+- Patient history (visits + prescriptions)
+- Payments (mark invoice as Paid)
+
 ## Core Features
 - User authentication (login for patients and doctors)
 - Doctor availability (consultation hours)
